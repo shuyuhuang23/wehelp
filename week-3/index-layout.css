@@ -1,0 +1,159 @@
+body {
+    margin: 0px;
+    /* padding: 0px; */
+}
+
+.headline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px;
+}
+
+.desktop-menu {
+    display: flex;
+}
+
+.item {
+    margin-left: 30px;
+}
+
+.mobile-menu {
+    text-align: center;
+    display: none;
+}
+
+.welcome {
+    font-size: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    margin-bottom: 10px;
+    background-color: #DDEEF9;
+}
+
+#promotion-div {
+    display: flex;
+    justify-content: center;
+    /* margin-top: 10px; */
+}
+
+#promotion-list {
+    display: flex;
+    justify-content: space-between;
+    width: 1200px;
+}
+
+.promotion-item {
+    flex: none;
+    width: 49%;
+    margin: 2px;
+    background-color: #CCDEE9;
+    display: flex;
+    align-items: center;
+}
+
+.promotion-img {
+    width: 80px;
+    height: 50px;
+}
+
+.promotion-title {
+    margin-left: 10px;
+}
+
+#content-div {
+    display: flex;
+    justify-content: center;
+}
+
+#content-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 1200px;
+}
+
+.content-item {
+    width: 24%;
+    margin: 2px;
+    margin-top: 10px;
+    background-color: #CCDEE9;
+    align-items: center;
+}
+
+.content-img {
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+}
+
+.content-title {
+    height: 25px;
+    text-align: center;
+}
+
+#more-div {
+    text-align: center;
+    margin: 25px 20px;
+}
+
+#more-btn {
+    background-color: #e7e7e7;
+    padding: 10px 24px;
+    font-size: 16px;   
+}
+
+#more-btn:hover
+{
+    cursor: pointer;
+    background-color: grey;
+    color: white;
+}
+
+@media (max-width: 1200px) {
+
+    #promotion-list {
+        width: 90%;
+        margin: 2px;
+    }
+
+    #content-list {
+        width: 90%;
+    }
+
+    .content-item {
+        width: 49%;
+        margin: 2px;
+    }
+}
+
+@media (max-width: 600px) {
+    .desktop-menu {
+        display: none;
+    }
+
+    .mobile-menu {
+        display: block;
+    }
+
+    #promotion-list {
+        flex-wrap: wrap;
+    }
+
+    .promotion-item {
+        width: 99%;
+    }
+
+    #content-list {
+        justify-content: right;
+    }
+
+    .content-item {
+        margin-top: 3px;
+        width: 100%;
+    }
+
+
+}
