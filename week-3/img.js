@@ -47,7 +47,6 @@ function renderContent() {
             let parsedResult = result['result']['results']
             let contentList = document.getElementById('content-list');
 
-            console.log(parsedResult.length);
             let endIdx = currentIdx + PAGINATION
             while (currentIdx < Math.min(parsedResult.length, endIdx)) {
                 let contentItem = document.createElement('div');
@@ -69,27 +68,6 @@ function renderContent() {
 
                 currentIdx += 1;
             }
-            // for (let i = PROMOTION_NUM; i < PAGINATION + PROMOTION_NUM; i++) {
-
-            //     let contentItem = document.createElement('div');
-            //     contentItem.className = "content-item";
-
-            //     let contentImg = document.createElement('img');
-            //     contentImg.className = "content-img";
-            //     contentImg.src = 'http' + parsedResult[i]['file'].split('http')[1];
-
-            //     let contentTitle = document.createElement('div');
-            //     contentTitle.className = "content-title";
-            //     let contentTitleText = document.createTextNode(parsedResult[i]['stitle']);
-            //     contentTitle.appendChild(contentTitleText);
-
-            //     contentItem.appendChild(contentImg);
-            //     contentItem.appendChild(contentTitle);
-
-            //     contentList.appendChild(contentItem);
-
-            //     page_cnt += 1;
-            // }
 
         });
 }
