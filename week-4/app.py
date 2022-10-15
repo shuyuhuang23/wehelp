@@ -15,6 +15,19 @@ def index():
     #     return redirect(url_for("signin_sucess"))
     return render_template('index.html', title = '首頁', header = '歡迎光臨，請輸入帳號密碼')
 
+
+@app.route("/square/<int:num>")
+def square_calculation(num):
+    result = num * num
+    return render_template('calculation.html', title = '結果頁', header = '正整數平方計算結果', square = result)
+
+@app.route("/square")
+def square():
+    num = request.args.get("num", "")
+    if num == "":
+        return redirect(url_for("index"))
+    return redirect(f"/square/{num}")
+
 @app.route("/signin", methods = ["POST"])
 def signin():
     username = request.form["username"]
@@ -44,10 +57,4 @@ def signout():
     session["status"] = "signout"
     return redirect(url_for("index"))
 
-@app.route("/square")
-def square():
-    num = int(request.args.get("num", "1"))
-    result = num * num
-    return render_template('calculation.html', title = '結果頁', header = '正整數平方計算結果', square = result)
-
-app.run(port = 3000, debug = True)
+app.run(port = 3000)
