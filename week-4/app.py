@@ -21,12 +21,12 @@ def square_calculation(num):
     result = num * num
     return render_template('calculation.html', title = '結果頁', header = '正整數平方計算結果', square = result)
 
-@app.route("/square")
-def square():
-    num = request.args.get("num", "")
-    if num == "":
-        return redirect(url_for("index"))
-    return redirect(f"/square/{num}")
+# @app.route("/square")
+# def square():
+#     num = request.args.get("num", "")
+#     if num == "":
+#         return redirect(url_for("index"))
+#     return redirect(f"/square/{num}")
 
 @app.route("/signin", methods = ["POST"])
 def signin():

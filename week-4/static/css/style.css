@@ -16,6 +16,9 @@ header {
     text-align: center;
 }
 
-.form-signin>div, .form-square>div {
+/* .form-signin>div, .form-square>div {
+    margin: 5px;
+} */
+.form-signin>div, .wrapper>div {
     margin: 5px;
 }
