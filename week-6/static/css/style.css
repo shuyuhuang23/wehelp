@@ -1,0 +1,25 @@
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    line-height: 100px;
+    color: #ffffff;
+    font-size: 2em;
+    font-weight: bold;
+    background-color: #223344;
+}
+
+.wrapper {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.form-signup>div, .form-signin>div, .wrapper>div, .form-message>div {
+    margin: 5px;
+}
+
+.message {
+ font-size: 1.5em;
+}

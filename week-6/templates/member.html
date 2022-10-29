@@ -1,0 +1,36 @@
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="static/css/style.css" />
+    <title>{{ title }}</title>
+</head>
+
+<body>
+    <header>
+        <span>{{ header }}</spaln>
+    </header>
+    <div class="wrapper">
+        <h2>{{ name }}，歡迎登入系統</h2>
+        <h2><a href="/signout">登出系統</a></h2>
+    </div>
+    <hr>
+    <div class="wrapper">
+        <h2>快來留言吧</h2>
+        <form class="form-message" action="/message" method="post">
+            <div>
+                內容 <input type="text" name="content" required/>
+            </div>
+            <div>
+                <button>送出</button>
+            </div>
+        </form>
+    </div>
+    <hr>
+    <div class="wrapper">
+        {% for item in message %}
+        <div class="message"><b>{{ item['name'] }}:</b> {{ item['content'] }}</div>
+        {% endfor %}
+    </div>
+</body>
+
+</html>
