@@ -12,16 +12,15 @@ connection = mysql.connector.connect(
     user     = mysqldb.user, 
     password = mysqldb.password,
     host     = mysqldb.host,
-    database = mysqldb.database
-)
+    database = mysqldb.database)
 
 app = Flask(__name__)
 app.secret_key = "XXX"
 
 @app.route("/")
 def index():
-    if session['status'] == "signin":
-        return redirect(url_for("signin_success"))
+    if session.get('status') == "signin":
+            return redirect(url_for("signin_success"))
     return render_template('index.html', title = '首頁', header = '歡迎光臨，請註冊登入系統')
 
 @app.route("/signup", methods = ["POST"])
@@ -32,18 +31,18 @@ def signup():
     if name == '' or username == '' or password == '':
         return redirect(url_for("action_error", message = "請輸入姓名、帳號、密碼"))
     with connection.cursor() as cursor:
-        select_db_query = f"SELECT * FROM member WHERE username = '{username}'"
-        cursor.execute(select_db_query)
+        select_db_query = "SELECT * FROM member WHERE username = %(username)s"
+        cursor.execute(select_db_query, {'username': username})
         result = cursor.fetchall()
         if len(result) > 0:
             return redirect(url_for("action_error", message = "帳號已經被註冊"))
         else:
-            insert_db_query = f'''
+            insert_db_query = '''
             INSERT INTO member (`name`, username, `password`)
             VALUES 
-                ('{name}', '{username}', '{password}')
+                (%(name)s, %(username)s, %(password)s)
             '''
-            cursor.execute(insert_db_query)
+            cursor.execute(insert_db_query, {'name': name, 'username': username, 'password': password})
             connection.commit()
             return redirect("/")
 
@@ -55,8 +54,8 @@ def signin():
         return redirect(url_for("action_error", message = "請輸入帳號、密碼"))
     
     with connection.cursor() as cursor:
-        select_db_query = f"SELECT id, name, username, password FROM member WHERE username = '{username}'"
-        cursor.execute(select_db_query)
+        select_db_query = "SELECT id, name, username, password FROM member WHERE username = %(username)s"
+        cursor.execute(select_db_query, {'username': username})
         result = cursor.fetchall()
         if len(result) == 1 and result[0][3] == password:
             session["status"] = "signin"
@@ -68,11 +67,11 @@ def signin():
 
 @app.route("/member")
 def signin_success():
-    if session['status'] == "signout":
+    if session.get('status') != "signin":
         return redirect(url_for("index"))
     name = session.get("name")
     with connection.cursor() as cursor:
-        select_db_query = f"SELECT b.name, a.content FROM message a JOIN member b on a.member_id = b.id ORDER BY a.time DESC"
+        select_db_query = "SELECT b.name, a.content FROM message a JOIN member b on a.member_id = b.id ORDER BY a.time DESC"
         cursor.execute(select_db_query)
         result = cursor.fetchall()
         message = [{'name': item[0], 'content': item[1]} for item in result]
@@ -83,12 +82,12 @@ def signin_success():
 def insert_message():
     content = request.form["content"]
     with connection.cursor() as cursor:
-        insert_db_query = f'''
+        insert_db_query = '''
         INSERT INTO `message` (member_id, content)
         VALUES 
-            ({session.get('user_id')}, "{content}")
+            (%(user_id)s, %(content)s)
         '''
-        cursor.execute(insert_db_query)
+        cursor.execute(insert_db_query, {'user_id': session.get('user_id'), 'content': content})
         connection.commit()
         return redirect("/member")
 
