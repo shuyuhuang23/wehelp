@@ -1,0 +1,72 @@
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="static/css/style.css" />
+    <title>{{ title }}</title>
+    <script src="static/src/member.js" async></script>
+</head>
+
+<body>
+    <header>
+        <span>{{ header }}</spaln>
+    </header>
+    <div class="wrapper">
+        <h2 id="welcome">{{ name }}，歡迎登入系統</h2>
+        <h2><a href="/signout">登出系統</a></h2>
+    </div>
+
+    <!-- <hr> -->
+
+    <div class="wrapper">
+        <h2>查詢會員姓名</h2>
+        <div>
+            <input id="check-member-username" type="text" name="username" />
+            <button id="check-member-submit">查詢</button>
+        </div>
+        <div id="check-member-result"></div>
+    </div>
+
+    <div class="wrapper">
+        <h2>更新我的姓名</h2>
+        <div>
+            <input id="change-member-name" type="text" name="name" />
+            <button id="change-member-submit">查詢</button>
+        </div>
+        <div id="change-member-result"></div>
+    </div>
+    <hr>
+
+    <div class="wrapper">
+        <h2>快來留言吧</h2>
+        <form class="form-message" action="/message" method="post">
+            <div>
+                內容 <input type="text" name="content" required />
+            </div>
+            <div>
+                <button>送出</button>
+            </div>
+        </form>
+    </div>
+
+
+        <!-- <script type="text/javascript">
+            document.getElementById('get-member').onclick = function() {
+    console.log(123)
+    alert(1223)
+    // fetch('XMLHttpRequest-1.txt')
+    //     .then(resp => resp.text())
+    //     .then(text => document.getElementById('table').innerHTML = text);
+}; -->
+
+    <!-- </script> -->
+
+    <hr>
+    
+    <div class="wrapper">
+        {% for item in message %}
+        <div class="message"><b>{{ item['name'] }}:</b> {{ item['content'] }}</div>
+        {% endfor %}
+    </div>
+</body>
+
+</html>
